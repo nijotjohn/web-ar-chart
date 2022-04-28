@@ -73,9 +73,6 @@
           init3DScene();
         }
 
-        function initListeners() {
-          $(window).resize(onWindowResize);
-        }
 
         function init3DScene() {
 
@@ -97,7 +94,7 @@
           renderer.setSize(window.innerWidth, window.innerHeight);
           renderer.render(scene, camera);
 
-          $("#container").append(renderer.domElement);
+          document.querySelector("#container").append(renderer.domElement);
 
           init3DElements();
         }
