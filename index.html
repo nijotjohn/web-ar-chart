@@ -10,6 +10,7 @@
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.4/dist/mindar-image-three.prod.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
     
 
     <style>
@@ -40,18 +41,20 @@
           imageTargetSrc: "https://cdn.jsdelivr.net/npm/mind-ar@1.1.4/examples/image-tracking/assets/card-example/card.mind"
         });
         let {renderer, scene, camera} = mindarThree;
-        // const anchor = mindarThree.addAnchor(0);
-        // const geometry = new THREE.PlaneGeometry(1, 0.55);
-        // const material = new THREE.MeshBasicMaterial( {color: 0x00ffff, transparent: true, opacity: 0.5} );
-        // const plane = new THREE.Mesh( geometry, material );
-        // anchor.group.add(plane);
-        // const start = async() => {
-        //   await mindarThree.start();
-        //   renderer.setAnimationLoop(() => {
-        //     renderer.render(scene, camera);
-        //   });
-        // }
-        // start();
+        const anchor = mindarThree.addAnchor(0);
+        const geometry = new THREE.PlaneGeometry(1, 0.55);
+        const material = new THREE.MeshBasicMaterial( {color: 0x00ffff, transparent: true, opacity: 0.5} );
+        const plane = new THREE.Mesh( geometry, material );
+        anchor.group.add(plane);
+        const start = async() => {
+          await mindarThree.start();
+          renderer.setAnimationLoop(() => {
+            
+            init();
+            renderer.render(scene, camera);
+          });
+        }
+        start();
 
 
 
@@ -66,7 +69,6 @@
         // Arrays
         var bar = new Array();
 
-        init();
 
         function init() {
           init3DScene();
@@ -149,7 +151,7 @@
               color: colour
             });
 
-            id = new THREE.Mesh(geometry, material);
+            let id = new THREE.Mesh(geometry, material);
 
             id.position.x = i * 5;
             id.name = "bar-" + i;
@@ -159,7 +161,7 @@
             scene.add(id);
             bar.push(id);
 
-            selectedBar = bar[Math.floor(bar.length / 2)];
+            let selectedBar = bar[Math.floor(bar.length / 2)];
           }
 
           for (var i = 0; i < bar.length; i++) {
@@ -184,7 +186,7 @@
           });
           material.side = THREE.BackSide
 
-          floor = new THREE.Mesh(geometry, material);
+          let floor = new THREE.Mesh(geometry, material);
 
           floor.position.set(0, 1000, 0);
           floor.rotation.x = THREE.Math.degToRad(-90);
