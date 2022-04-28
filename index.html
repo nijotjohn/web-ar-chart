@@ -50,8 +50,9 @@
           await mindarThree.start();
           renderer.setAnimationLoop(() => {
             
-            init();
+            
             renderer.render(scene, camera);
+            init();
           });
         }
         start();
